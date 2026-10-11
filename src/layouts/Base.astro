@@ -14,9 +14,10 @@ interface Props {
 }
 const { title, description, jsonLd = [], noindex = false } = Astro.props;
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const fullTitle = title === site.name ? title : `${title} | ${site.name}`;
-const ogImage = new URL('/og.jpg', site.url).href;
+const ogImage = new URL(`${base}/og.jpg`, site.url).href;
 ---
 <!doctype html>
 <html lang="de">
@@ -28,8 +29,8 @@ const ogImage = new URL('/og.jpg', site.url).href;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href={`${base}/favicon.png`} />
+    <link rel="apple-touch-icon" href={`${base}/apple-touch-icon.png`} />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="de_DE" />

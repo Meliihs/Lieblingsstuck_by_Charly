@@ -2,14 +2,15 @@
 import Button from './Button.astro';
 import { nav, site } from '../data/site';
 
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const path = Astro.url.pathname.slice(base.length).replace(/\/$/, '') || '/';
 const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`);
 ---
 <div class="top-sentinel" data-sentinel aria-hidden="true"></div>
 <header class="site-header" data-header>
   <div class="container header__inner">
     <a class="brand" href="/" aria-label={`${site.name} – Startseite`}>
-      <img src="/apple-touch-icon.png" alt="" width="68" height="68" />
+      <img src={`${base}/apple-touch-icon.png`} alt="" width="68" height="68" />
     </a>
 
     <nav class="nav" aria-label="Hauptnavigation">

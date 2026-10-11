@@ -2,7 +2,7 @@
 export const site = {
   name: 'Lieblingsstück by Charly',
   short: 'Lieblingsstück',
-  url: 'https://lieblingsstueck-keramikdormagen.com',
+  url: 'https://meliihs.github.io',
   legalName: 'A.+C. Legouez GbR',
   address: { street: 'Florastraße 4', zip: '41539', city: 'Dormagen' },
   email: 'clegouez@icloud.com',
