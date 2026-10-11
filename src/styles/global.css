@@ -182,17 +182,20 @@ figure.photo figcaption { position: absolute; left: 0; bottom: 0; right: 0; }
   transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease);
 }
 .btn__icon svg { width: 1.05rem; height: 1.05rem; }
-.btn:hover { --btn-bg: var(--espresso); }
-.btn:hover .btn__icon { transform: translateX(3px); }
 .btn:active { transform: scale(0.985); }
 .btn--light { --btn-bg: var(--ivory); --btn-fg: var(--espresso); }
-.btn--light:hover { --btn-bg: var(--cream); }
 .btn--ghost { --btn-bg: transparent; --btn-fg: var(--ink); border-color: var(--line); }
-.btn--ghost:hover { --btn-bg: var(--espresso); --btn-fg: var(--ivory); border-color: var(--espresso); }
 .section--dark .btn--ghost { --btn-fg: var(--ivory); border-color: var(--line-light); }
-.section--dark .btn--ghost:hover { --btn-bg: var(--ivory); --btn-fg: var(--espresso); border-color: var(--ivory); }
 .btn--sm { min-height: 2.75rem; padding-left: 1.25rem; gap: 0.75rem; font-size: 0.875rem; }
 .btn--sm .btn__icon { width: 2rem; height: 2rem; }
+/* Hover nur mit Maus – auf Touchgeräten bleibt der Button sonst nach dem Tippen eingefärbt */
+@media (hover: hover) {
+  .btn:hover { --btn-bg: var(--espresso); }
+  .btn:hover .btn__icon { transform: translateX(3px); }
+  .btn--light:hover { --btn-bg: var(--cream); }
+  .btn--ghost:hover { --btn-bg: var(--espresso); --btn-fg: var(--ivory); border-color: var(--espresso); }
+  .section--dark .btn--ghost:hover { --btn-bg: var(--ivory); --btn-fg: var(--espresso); border-color: var(--ivory); }
+}
 
 .link-arrow {
   display: inline-flex; align-items: center; gap: 0.6rem; font-weight: 600; font-size: 0.9375rem;
@@ -271,7 +274,6 @@ figure.photo figcaption { position: absolute; left: 0; bottom: 0; right: 0; }
 }
 @media (max-width: 480px) {
   .header__inner { gap: var(--space-3); }
-  .brand img { width: 3.5rem; height: 3.5rem; }
   .header__cta { display: inline-flex; min-height: 2.5rem; padding: 0 1rem; }
   .header__cta .btn__icon { display: none; }
   .menu-toggle { width: 2.75rem; height: 2.75rem; }
@@ -530,6 +532,25 @@ figure.photo figcaption { position: absolute; left: 0; bottom: 0; right: 0; }
 
 /* 404 */
 .not-found { min-height: 60vh; display: grid; align-content: center; }
+
+/* ---------- Handy-Optimierung (nur kleine Bildschirme, Desktop bleibt unverändert) ---------- */
+@media (max-width: 1079px) {
+  :root { --header-h: 4.5rem; }
+  .brand img { width: 3.5rem; height: 3.5rem; }
+}
+@media (max-width: 900px) {
+  /* Tippflächen von Links mindestens ~44 px hoch */
+  .link-arrow { padding-block: 0.8rem; }
+  .contact-big { padding-block: 0.6rem; }
+  .footer__col { gap: 0; }
+  .footer__col h2 { margin-bottom: var(--space-3); }
+  .footer__col a, .footer__legal a { padding-block: 0.65rem; }
+  .footer__legal { gap: 0 var(--space-5); }
+  .footer__bottom, .caption { font-size: 0.875rem; }
+}
+@media (max-width: 600px) {
+  :root { --fs-body: 1.125rem; --space-section: 3.5rem; }
+}
 
 /* ---------- Bewegung reduzieren ---------- */
 @media (prefers-reduced-motion: reduce) {
