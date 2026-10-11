@@ -13,22 +13,22 @@ E-Mail: clegouez@icloud.com
 
 Der Schutz deiner persönlichen Daten ist uns sehr wichtig. Wir behandeln personenbezogene Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften, insbesondere der DSGVO. Diese Datenschutzerklärung informiert darüber, welche Daten wir erheben und wie wir sie verwenden.
 
-## 3. Website-Hosting über Squarespace
+## 3. Website-Hosting über GitHub Pages
 
-Unsere Website wird über den Dienstanbieter Squarespace betrieben:  
-Squarespace Inc., 225 Varick Street, 12th Floor, New York, NY 10014, USA  
-Beim Besuch unserer Website werden durch Squarespace automatisch folgende Daten erhoben und verarbeitet:
+Unsere Website wird über den Dienst GitHub Pages betrieben:  
+GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA  
+Beim Besuch unserer Website werden durch GitHub automatisch folgende Daten erhoben und verarbeitet:
 
-- IP-Adresse (ggf. anonymisiert)
-- Datum und Uhrzeit des Zugrufs
+- IP-Adresse
+- Datum und Uhrzeit des Zugriffs
 - aufgerufene Seiten
 - Browsertyp und -version
 - Betriebssystem
 
-Diese Daten dienen der technischen Bereitstellung der Website und werden in der Regel anonymisiert ausgewertet.  
-Die Daten werden auf Servern in den USA gespeichert. Squarespace ist nach dem EU-U.S. Data Privacy Framework zertifiziert, was einen angemessenen Datenschutz gewährleistet.  
-Weitere Infos findest du in der Datenschutzerklärung von Squarespace:  
-<https://www.squarespace.com/privacy>
+Diese Daten dienen der technischen Bereitstellung der Website.  
+Die Daten können auf Servern in den USA verarbeitet werden. GitHub ist nach dem EU-U.S. Data Privacy Framework zertifiziert, was einen angemessenen Datenschutz gewährleistet.  
+Weitere Infos findest du in der Datenschutzerklärung von GitHub:  
+<https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement>
 
 ## 4. Terminbuchung mit Acuity Scheduling
 
@@ -52,8 +52,7 @@ Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO
 
 ## 6. Cookies und technische Dienste
 
-Squarespace setzt technisch notwendige Cookies, z. B. zur Sitzungssteuerung und zur Funktion des Formulars. Tracking-Cookies (z. B. für Marketingzwecke) verwenden wir nicht aktiv.  
-Ein Cookie-Hinweis wird beim Besuch der Seite eingeblendet.
+Unsere Website selbst setzt keine Cookies und verwendet kein Tracking. Erst wenn du auf der Terminseite den Buchungskalender lädst, wird eine Verbindung zu Acuity Scheduling (Squarespace) hergestellt; dabei können technisch notwendige Cookies gesetzt werden. Tracking-Cookies für Marketingzwecke verwenden wir nicht.
 
 ## 7. Speicherdauer
 
