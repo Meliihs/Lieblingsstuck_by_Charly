@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { Content } from '../legal/datenschutz.md';
+---
+<Base title="Datenschutzerklärung" description="Datenschutzerklärung von Lieblingsstück by Charly, Dormagen.">
+  <PageHero eyebrow="Rechtliches">Datenschutz&shy;erklärung</PageHero>
+  <section class="section" style="padding-top:0">
+    <div class="container container--narrow"><div class="prose"><Content /></div></div>
+  </section>
+</Base>

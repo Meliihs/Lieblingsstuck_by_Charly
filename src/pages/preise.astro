@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import PageCta from '../components/PageCta.astro';
+import { prices, pricingIncludes } from '../data/pricing';
+---
+<Base
+  title="Preise"
+  description="Preise im Keramikstudio Lieblingsstück in Dormagen: Tassen, Teller, Vasen, Schalen, Kannen und mehr – inklusive Rohkeramik, Farbe, Glasur und Brand."
+>
+  <PageHero eyebrow="Preise">
+    Klare Preise, <em>nichts Verstecktes.</em>
+    <Fragment slot="lead">Die Preise setzen sich aus Rohkeramik, Farbe, Glasur und Brand zusammen. Eine separate Kursgebühr gibt es nicht (außer bei Events).</Fragment>
+  </PageHero>
+
+  <section class="section--tight section" aria-labelledby="list-title" style="padding-top:0">
+    <div class="container split">
+      <div class="split__sticky">
+        <h2 id="list-title" class="reveal">Dein Stück, <em>dein Preis.</em></h2>
+        <p class="muted reveal">Die Preise richten sich nach dem gewählten Keramikstück. Enthalten sind:</p>
+        <ul class="includes reveal">
+          {pricingIncludes.map((i) => <li>{i}</li>)}
+        </ul>
+      </div>
+      <div>
+        <ul class="price-list reveal">
+          {prices.map((p) => (
+            <li class="price-list__row" id={p.id}>
+              <span class="price-list__name">{p.name}</span>
+              <span class="price-list__fill" aria-hidden="true"></span>
+              <span class="price-list__range">{p.range}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="notice reveal" style="margin-top:2rem">
+          <h3>Bezahlung</h3>
+          <p>Bar, EC-Karte, Kreditkarte oder Gutschein werden akzeptiert. Es gibt keine versteckten Kosten.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <PageCta text="Wähle online deinen Termin und such dir vor Ort dein Lieblingsstück aus." secondary={{ href: '/ablauf', label: 'So läuft ein Besuch ab' }}>
+    Welches Stück wird <em>deins?</em>
+  </PageCta>
+</Base>

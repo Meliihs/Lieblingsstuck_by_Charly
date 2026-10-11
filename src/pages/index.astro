@@ -1,0 +1,265 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Photo from '../components/Photo.astro';
+import Faq from '../components/Faq.astro';
+import Icon from '../components/Icon.astro';
+import { hours, site } from '../data/site';
+import { prices } from '../data/pricing';
+import { homeFaq } from '../data/faq';
+import { eventDate, offers, upcomingSeasonal, voucher } from '../data/events';
+
+import axolotl from '../assets/photos/axolotl-teller.jpg';
+import froschMond from '../assets/photos/gemaelde-frosch-mond.jpg';
+import theke from '../assets/photos/studio-theke.jpg';
+import rohlinge from '../assets/photos/rohlinge-regal.jpg';
+import malen from '../assets/photos/malen-schale.jpg';
+import fertig from '../assets/photos/tasse-teller-frosch.jpg';
+import regalwand from '../assets/photos/studio-regalwand.jpg';
+import farbbar from '../assets/photos/studio-farbbar.jpg';
+import geburtstag from '../assets/photos/illustration-geburtstag.jpg';
+import froesche from '../assets/photos/illustration-froesche.jpg';
+import raum from '../assets/photos/studio-raum.jpg';
+
+const seasonal = upcomingSeasonal();
+const toSchema = (d: (typeof hours)[number]) =>
+  d.slots.map(([opens, closes]) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: d.en, opens, closes }));
+
+const localBusiness = {
+  '@type': 'LocalBusiness',
+  name: site.name,
+  url: site.url,
+  image: `${site.url}/og.jpg`,
+  telephone: site.phones[0].tel,
+  email: site.email,
+  address: { '@type': 'PostalAddress', streetAddress: site.address.street, postalCode: site.address.zip, addressLocality: site.address.city, addressCountry: 'DE' },
+  openingHoursSpecification: hours.flatMap(toSchema),
+  sameAs: [site.social.instagram, site.social.tiktok],
+};
+---
+<Base
+  title="Keramik bemalen in Dormagen"
+  description="Keramik bemalen im Keramikstudio Lieblingsstück by Charly in Dormagen: Rohling aussuchen, nach Lust und Laune bemalen, wir glasieren und brennen. Jetzt Termin buchen."
+  jsonLd={[localBusiness]}
+>
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow reveal">Keramikstudio · Dormagen</p>
+        <h1 class="display reveal" id="hero-title" style="--d:.08s">Aus kleinen Ideen werden <em>Lieblingsstücke.</em></h1>
+        <p class="lead reveal" style="--d:.16s">Deine kreative Auszeit. Deine Farben. Dein ganz persönliches Unikat.</p>
+        <div class="hero__cta reveal" style="--d:.24s">
+          <Button href="/appointments">Termin buchen</Button>
+          <a class="link-arrow" href="/about">Das Studio entdecken <Icon name="arrow" /></a>
+        </div>
+        <p class="hero__meta reveal" style="--d:.32s">
+          <span><strong>{site.address.street}</strong>, {site.address.city}</span>
+          <span>Mittwoch bis Samstag geöffnet</span>
+          <span>3 Stunden Malzeit</span>
+        </p>
+      </div>
+
+      <div class="hero__art reveal" style="--d:.2s">
+        <Photo class="hero__main" src={axolotl} priority sizes="(min-width: 900px) 40vw, 80vw" alt="Bemalter Keramikteller mit rosa Axolotl vor dunklem Hintergrund" />
+        <Photo class="hero__sub" src={froschMond} priority sizes="(min-width: 900px) 18vw, 36vw" alt="Gemalter Frosch mit goldenen Flügeln, der einen gelben Mond hält" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Markenintro -->
+  <section class="section section--cream" id="studio" aria-labelledby="intro-title">
+    <div class="container intro">
+      <div class="intro__text">
+        <p class="eyebrow reveal">Das Studio</p>
+        <h2 class="intro__statement reveal" id="intro-title">Hier entsteht mehr als Keramik: eine <em>kreative Auszeit</em>, allein, mit Freunden oder mit der Familie.</h2>
+        <p class="lead reveal">Wähle aus einer Vielzahl an Rohlingen, bemale sie nach Lust und Laune und schaffe persönliche Unikate – in gemütlicher Atmosphäre.</p>
+        <div class="reveal"><Button href="/about" variant="ghost">Über das Studio</Button></div>
+      </div>
+      <Photo class="intro__img reveal" src={theke} sizes="(min-width: 900px) 30vw, 90vw" alt="Offener Studioraum mit Theke, rosa Wand und Kaffeebereich" />
+    </div>
+  </section>
+
+  <!-- So funktioniert's -->
+  <section class="section" aria-labelledby="steps-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">So funktioniert’s</p>
+        <h2 id="steps-title" class="reveal">In drei Schritten zu deinem <em>Lieblingsstück.</em></h2>
+      </div>
+
+      <ol class="steps">
+        <li class="step reveal">
+          <span class="step__num" aria-hidden="true">01</span>
+          <Photo class="step__img" src={rohlinge} sizes="(min-width: 900px) 28vw, 90vw" alt="Weiße Regale mit Keramik-Rohlingen: Tassen, Teller und Schalen" />
+          <div class="step__body">
+            <h3>Lieblingsstück auswählen</h3>
+            <p>Wähle unter unserer Auswahl verschiedener Rohkeramiken dein Lieblingsstück aus.</p>
+          </div>
+        </li>
+        <li class="step reveal" style="--d:.12s">
+          <span class="step__num" aria-hidden="true">02</span>
+          <Photo class="step__img" src={malen} sizes="(min-width: 900px) 28vw, 90vw" alt="Eine Hand bemalt mit einem Pinsel eine helle Keramikschale" />
+          <div class="step__body">
+            <h3>Keramik individuell bemalen</h3>
+            <p>Farbe aussuchen und dein Lieblingsstück nach Herzenslust bemalen. Dafür hast du 3 Stunden Zeit.</p>
+          </div>
+        </li>
+        <li class="step reveal" style="--d:.24s">
+          <span class="step__num" aria-hidden="true">03</span>
+          <Photo class="step__img" src={fertig} sizes="(min-width: 900px) 28vw, 90vw" alt="Fertig gebrannte, bemalte Tasse und Teller mit Fröschen auf Pilzen" />
+          <div class="step__body">
+            <h3>Glasieren lassen &amp; abholen</h3>
+            <p>Wir glasieren und brennen die Keramik. Nach ca. 2–3 Wochen ist dein fertiges Lieblingsstück abholbereit.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="facts reveal">
+        <div class="fact"><span class="fact__value">3 Std.</span><span class="fact__label">Malzeit im Studio</span></div>
+        <div class="fact"><span class="fact__value">2–3 Wo.</span><span class="fact__label">bis zur Abholung, je nach Auslastung</span></div>
+        <div class="cluster" style="margin-left:auto">
+          <Button href="/appointments">Termin buchen</Button>
+          <a class="link-arrow" href="/ablauf">Ablauf im Detail <Icon name="arrow" /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Keramik entdecken -->
+  <section class="section section--cream" aria-labelledby="discover-title">
+    <div class="container discover">
+      <div class="stack" style="--stack:var(--space-6)">
+        <p class="eyebrow reveal">Keramik entdecken</p>
+        <h2 id="discover-title" class="reveal">Von der Tasse bis zur <em>Spardose.</em></h2>
+        <p class="lead reveal">Such dir das Stück aus, das zu dir passt. Der Preis enthält Rohkeramik, Farbe, Glasur und Brand.</p>
+        <nav class="index reveal" aria-label="Keramikkategorien und Preise">
+          {prices.map((p) => (
+            <a class="index__row" href={`/preise#${p.id}`}>
+              <span class="index__name">{p.name}</span>
+              <span class="index__fill" aria-hidden="true"></span>
+              <span class="index__price">{p.range}</span>
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <div class="collage">
+        <Photo class="reveal" src={regalwand} sizes="(min-width: 900px) 32vw, 55vw" alt="Lange Regalwand mit weißen Keramik-Rohlingen im Studio" />
+        <Photo class="reveal" src={farbbar} sizes="(min-width: 900px) 24vw, 40vw" alt="Regalinsel mit Keramikfarben und Rohlingen im Studio" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Events -->
+  <section class="section" id="events" aria-labelledby="events-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">Events &amp; besondere Anlässe</p>
+        <h2 id="events-title" class="reveal">Gemeinsam feiern, gestalten, <em>verschenken.</em></h2>
+      </div>
+
+      <div class="events">
+        <article class="offer reveal">
+          <Photo class="offer__img" src={geburtstag} sizes="(min-width: 900px) 55vw, 90vw" alt="Illustration eines Frosches mit Partyhut und dem Schriftzug Happy Birthday" />
+          <div class="offer__body">
+            <p class="offer__kicker">{offers[0].kicker}</p>
+            <h3>{offers[0].title}</h3>
+            <p>{offers[0].text}</p>
+            <div style="margin-top:.5rem"><Button href="/events#anfrage" variant="ghost">Event anfragen</Button></div>
+          </div>
+        </article>
+
+        <article class="offer reveal" style="--d:.1s">
+          <Photo class="offer__img" src={froesche} sizes="(min-width: 900px) 36vw, 90vw" alt="Illustration: zwei grüne Frösche umarmen sich" />
+          <div class="offer__body">
+            <p class="offer__kicker">{offers[1].kicker}</p>
+            <h3>{offers[1].title}</h3>
+            <p>{offers[1].text}</p>
+            <div style="margin-top:.5rem"><Button href="/events#anfrage" variant="ghost">Event anfragen</Button></div>
+          </div>
+        </article>
+
+        <article class="offer offer--voucher reveal" style="--d:.2s">
+          <div class="offer__body">
+            <p class="offer__kicker">Zum Verschenken</p>
+            <h3>{voucher.title}</h3>
+            <p>{voucher.text}</p>
+          </div>
+          <div><Button href="/contact" variant="light">Im Studio vorbeikommen</Button></div>
+        </article>
+      </div>
+
+      {seasonal.length > 0 && (
+        <div class="seasonal">
+          <div class="seasonal__head reveal">
+            <h3>Saisonale Events</h3>
+            <a class="link-arrow" href="/events#saison">Alle Events <Icon name="arrow" /></a>
+          </div>
+          {seasonal.map((e) => {
+            const d = eventDate(e.date);
+            return (
+              <article class="seasonal__row reveal">
+                <p class="seasonal__date">{d.day}<small>{d.weekday}, {e.time} Uhr</small></p>
+                <div>
+                  <h4>{e.title}</h4>
+                  <p class="seasonal__text">{e.text}</p>
+                </div>
+                <Button href="/appointments" variant="ghost" size="sm">Platz buchen</Button>
+              </article>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Über das Studio -->
+  <section class="section section--cream" aria-labelledby="about-title">
+    <div class="container about">
+      <Photo class="about__single reveal" src={raum} sizes="(min-width: 900px) 42vw, 90vw" alt="Das Studio in Dormagen: heller Raum mit Tischen und Regalen voller Keramik" />
+      <div class="about__text">
+        <p class="eyebrow reveal">Wer wir sind</p>
+        <h2 id="about-title" class="reveal">Mutter und Tochter, ein <em>gemeinsamer Traum.</em></h2>
+        <p class="lead reveal">Wir teilen nicht nur die Liebe zur Kreativität, sondern auch den Traum, etwas Eigenes zu schaffen. Mit unserem kleinen Keramikstudio haben wir genau das verwirklicht: einen Ort, an dem man zur Ruhe kommt, den Alltag für einen Moment vergisst und einfach gestalten darf.</p>
+        <div class="reveal"><Button href="/about" variant="ghost">Mehr über uns</Button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" aria-labelledby="faq-title">
+    <div class="container faq-layout">
+      <div class="faq-layout__intro">
+        <p class="eyebrow reveal">Häufige Fragen</p>
+        <h2 id="faq-title" class="reveal">Gut zu <em>wissen.</em></h2>
+        <p class="lead reveal">Die wichtigsten Antworten vor deinem Besuch. Alles Weitere findest du in den ausführlichen FAQ.</p>
+        <a class="link-arrow reveal" href="/faq">Alle Fragen ansehen <Icon name="arrow" /></a>
+      </div>
+      <div class="reveal"><Faq items={homeFaq} /></div>
+    </div>
+  </section>
+
+  <!-- Buchungs-CTA -->
+  <section class="section section--dark" aria-labelledby="book-title">
+    <div class="container cta-band">
+      <div class="cta-band__copy">
+        <p class="eyebrow reveal">Termin buchen</p>
+        <h2 id="book-title" class="reveal">Plane deine <em>kreative Auszeit.</em></h2>
+        <p class="lead reveal">Such dir online deinen Wunschtermin aus. Für Events wie Geburtstage, JGAs oder Firmenevents stellst du bitte vorab eine Anfrage.</p>
+        <div class="cluster reveal">
+          <Button href="/appointments" variant="light">Jetzt Termin buchen</Button>
+          <Button href="/events#anfrage" variant="ghost">Event anfragen</Button>
+        </div>
+      </div>
+      <dl class="cta-band__list reveal">
+        <div class="cta-band__item"><dt>Was</dt><dd>Keramik bemalen<small>Rohling aussuchen, bemalen, wir glasieren &amp; brennen</small></dd></div>
+        <div class="cta-band__item"><dt>Dauer</dt><dd>3 Stunden Malzeit<small>Abholung nach ca. 2–3 Wochen</small></dd></div>
+        <div class="cta-band__item"><dt>Wo</dt><dd>{site.address.street}, {site.address.city}<small>Buchung online über unseren Kalender</small></dd></div>
+        <div class="cta-band__item"><dt>Öffnungszeiten</dt><dd>
+          Mi–Do 12–15 &amp; 17–20 Uhr<br />Fr 9–12 &amp; 17–20 Uhr<br />Sa 11–14 &amp; 15–18 Uhr
+          <small>Montag, Dienstag und Sonntag Ruhetag</small></dd></div>
+      </dl>
+    </div>
+  </section>
+</Base>

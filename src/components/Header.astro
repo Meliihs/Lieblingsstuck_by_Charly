@@ -1,0 +1,81 @@
+---
+import Button from './Button.astro';
+import { nav, site } from '../data/site';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`);
+---
+<div class="top-sentinel" data-sentinel aria-hidden="true"></div>
+<header class="site-header" data-header>
+  <div class="container header__inner">
+    <a class="brand" href="/" aria-label={`${site.name} – Startseite`}>
+      <span class="brand__name">Lieblingsstück</span>
+      <span class="brand__sub">by Charly · Dormagen</span>
+    </a>
+
+    <nav class="nav" aria-label="Hauptnavigation">
+      <ul class="nav__list">
+        {nav.map((item) => (
+          <li><a class="nav__link" href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <Button href="/appointments" size="sm" class="header__cta">Termin buchen</Button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menü öffnen" data-menu-toggle>
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" data-menu data-open="false">
+  <nav aria-label="Mobile Navigation">
+    <ul class="mobile-menu__list">
+      {nav.map((item, i) => (
+        <li><a class="mobile-menu__link" style={`--i:${i}`} href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+      ))}
+    </ul>
+  </nav>
+  <div class="mobile-menu__foot">
+    <Button href="/appointments">Termin buchen</Button>
+    <p>{site.address.street}, {site.address.zip} {site.address.city}<br /><a href={`tel:${site.phones[0].tel}`}>{site.phones[0].label}</a></p>
+  </div>
+</div>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const sentinel = document.querySelector<HTMLElement>('[data-sentinel]');
+
+  if (toggle && menu) {
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+      menu.dataset.open = String(open);
+      document.body.classList.toggle('menu-open', open);
+    };
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    menu.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.dataset.open === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    window.matchMedia('(min-width: 1080px)').addEventListener('change', (e) => e.matches && setOpen(false));
+  }
+
+  // Schatten erst nach dem Scrollen – per IntersectionObserver statt Scroll-Listener.
+  if (header && sentinel) {
+    new IntersectionObserver(([entry]) => header.classList.toggle('is-scrolled', !entry!.isIntersecting)).observe(sentinel);
+  }
+</script>
+
+<style>
+  .top-sentinel { position: absolute; top: 0; left: 0; width: 1px; height: 1px; pointer-events: none; }
+</style>

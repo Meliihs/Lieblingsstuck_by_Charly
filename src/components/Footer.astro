@@ -1,0 +1,59 @@
+---
+import Icon from './Icon.astro';
+import { formatSlots, hours, nav, site } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <p class="footer__wordmark">Lieblingsstück<em>by Charly</em></p>
+        <p class="muted" style="max-width:26rem">Dein Keramikstudio in Dormagen – Keramik bemalen, Zeit schenken, Unikate mitnehmen.</p>
+      </div>
+
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h2>Studio</h2>
+          <address>
+            {site.address.street}<br />{site.address.zip} {site.address.city}
+          </address>
+          <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer">Route planen<span class="visually-hidden"> (öffnet in neuem Tab)</span></a>
+          <a href={`tel:${site.phones[0].tel}`}>{site.phones[0].label}</a>
+          <a href={`tel:${site.phones[1].tel}`}>{site.phones[1].label}</a>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </div>
+
+        <div class="footer__col footer__col--hours">
+          <h2>Öffnungszeiten</h2>
+          <dl class="footer__hours">
+            {hours.map((d) => (
+              <div><dt>{d.short}</dt><dd>{formatSlots(d.slots)}</dd></div>
+            ))}
+          </dl>
+        </div>
+
+        <div class="footer__col">
+          <h2>Entdecken</h2>
+          <a href="/appointments">Termin buchen</a>
+          {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+          <h2 style="margin-top:1rem">Folgen</h2>
+          <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" class="cluster" style="gap:.6rem"><Icon name="instagram" class="" /> Instagram<span class="visually-hidden"> (öffnet in neuem Tab)</span></a>
+          <a href={site.social.tiktok} target="_blank" rel="noopener noreferrer" class="cluster" style="gap:.6rem"><Icon name="tiktok" class="" /> TikTok<span class="visually-hidden"> (öffnet in neuem Tab)</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© {year} {site.legalName} · {site.name}</p>
+      <nav class="footer__legal" aria-label="Rechtliches">
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutzerklrung">Datenschutz</a>
+        <a href="/nutzungsbedingungen-1">AGB</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer__col :global(svg) { width: 1.1rem; height: 1.1rem; }
+</style>

@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import PageCta from '../components/PageCta.astro';
+import Photo from '../components/Photo.astro';
+import Button from '../components/Button.astro';
+
+import malen from '../assets/photos/malen-schale.jpg';
+import rohlinge from '../assets/photos/rohlinge-regal.jpg';
+import fertig from '../assets/photos/tasse-teller-frosch.jpg';
+import farbbar from '../assets/photos/studio-farbbar.jpg';
+
+const steps = [
+  { title: 'Ankommen & Einweisung', text: 'Du kommst vorbei – am besten mit Reservierung – und bekommst eine Einweisung. Vorkenntnisse brauchst du nicht: Das Bemalen ist auch für Anfänger geeignet.' },
+  { title: 'Lieblingsstück auswählen', text: 'Wähle unter unserer Auswahl verschiedener Rohkeramiken dein Lieblingsstück aus – zum Beispiel Tassen, Teller oder Figuren.' },
+  { title: 'Bemalen', text: 'Du bekommst Farben und Werkzeuge und malst dein Stück ganz nach deinen Vorstellungen an. Für deine Malzeit im Studio hast du 3 Stunden Zeit. Wir verwenden spezielle Keramikfarben, die ungiftig und lebensmittelecht sind.' },
+  { title: 'Glasieren & Brennen', text: 'Anschließend kümmern wir uns um Glasur und Brennvorgang. Je nach Auslastung brauchen wir dafür ca. 2–3 Wochen.' },
+  { title: 'Abholen', text: 'Sobald alle Keramiken eines Tages fertig sind, posten wir sie auf Instagram. Abholungen sind nur während unserer Öffnungszeiten möglich – bitte bring den Abholschein oder ein Foto davon sowie Verpackungsmaterial mit.' },
+];
+---
+<Base
+  title="Keramik bemalen – So funktioniert’s"
+  description="So läuft dein Besuch im Keramikstudio Dormagen ab: Rohling auswählen, in 3 Stunden bemalen, wir glasieren und brennen – Abholung nach ca. 2–3 Wochen."
+>
+  <PageHero eyebrow="Keramik bemalen">
+    So funktioniert <em>Keramikbemalen.</em>
+    <Fragment slot="lead">Rohling aussuchen, Farben wählen, losmalen – den Rest übernehmen wir. Für deine Malzeit im Studio hast du 3 Stunden Zeit.</Fragment>
+    <div slot="actions" class="cluster reveal" style="--d:.24s"><Button href="/appointments">Termin buchen</Button></div>
+    <Photo slot="image" class="page-hero__img" src={malen} priority sizes="(min-width: 900px) 30vw, 90vw" alt="Eine Hand bemalt mit einem Pinsel eine helle Keramikschale" />
+  </PageHero>
+
+  <section class="section" aria-labelledby="steps-title">
+    <div class="container split">
+      <div class="split__sticky">
+        <p class="eyebrow reveal">Dein Besuch</p>
+        <h2 id="steps-title" class="reveal">Fünf Stationen bis zum <em>Unikat.</em></h2>
+        <Photo class="reveal" src={rohlinge} sizes="(min-width: 900px) 28vw, 90vw" alt="Weiße Regale mit Keramik-Rohlingen: Tassen, Teller und Schalen" />
+      </div>
+      <ol class="detail-list">
+        {steps.map((s, i) => (
+          <li class="reveal">
+            <span class="detail-list__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <div><h3>{s.title}</h3><p>{s.text}</p></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--cream" aria-labelledby="good-title">
+    <div class="container split split--reverse">
+      <div class="stack">
+        <h2 id="good-title" class="reveal">Gut zu <em>wissen.</em></h2>
+        <ul class="check-list reveal">
+          <li>Keine künstlerischen Vorkenntnisse nötig.</li>
+          <li>Reservierung empfohlen – vor allem an Wochenenden, bei Events und in den Ferien. Spontan geht manchmal.</li>
+          <li>Kinder ab ca. 8 Jahren können mit Hilfe eines Erwachsenen gut mitmachen.</li>
+          <li>Der Preis enthält Rohkeramik, Farbe, Glasur und Brand. Eine separate Kursgebühr gibt es nicht (außer bei Events).</li>
+          <li>Bezahlt wird bar, mit EC-Karte, Kreditkarte oder Gutschein.</li>
+          <li>Für Events wie Geburtstage, JGAs oder Firmenevents bitten wir vorab um eine Anfrage.</li>
+        </ul>
+        <div class="cluster reveal">
+          <Button href="/preise" variant="ghost">Preise ansehen</Button>
+          <Button href="/events#anfrage" variant="ghost">Event anfragen</Button>
+        </div>
+      </div>
+      <div class="collage" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+        <Photo class="reveal" src={fertig} sizes="(min-width: 900px) 24vw, 45vw" alt="Fertig gebrannte, bemalte Tasse und Teller mit Fröschen auf Pilzen" style="grid-column:auto;aspect-ratio:3/4" />
+        <Photo class="reveal" src={farbbar} sizes="(min-width: 900px) 24vw, 45vw" alt="Regalinsel mit Keramikfarben und Rohlingen im Studio" style="grid-column:auto;aspect-ratio:3/4;margin-top:3rem" />
+      </div>
+    </div>
+  </section>
+
+  <PageCta text="Such dir online deinen Wunschtermin aus – wir freuen uns auf dich." secondary={{ href: '/faq', label: 'Häufige Fragen' }}>
+    Bereit für dein <em>Lieblingsstück?</em>
+  </PageCta>
+</Base>

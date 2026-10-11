@@ -1,0 +1,121 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import PageCta from '../components/PageCta.astro';
+import Photo from '../components/Photo.astro';
+import Button from '../components/Button.astro';
+import { site, mailto } from '../data/site';
+import { eventDate, offers, requestChecklist, upcomingSeasonal, voucher } from '../data/events';
+
+import geburtstag from '../assets/photos/illustration-geburtstag.jpg';
+import froesche from '../assets/photos/illustration-froesche.jpg';
+
+const seasonal = upcomingSeasonal();
+const images = { geburtstage: geburtstag, 'jga-team': froesche } as const;
+const alts = {
+  geburtstage: 'Illustration eines Frosches mit Partyhut und dem Schriftzug Happy Birthday',
+  'jga-team': 'Illustration: zwei grüne Frösche umarmen sich',
+} as const;
+
+const template = [
+  'Hallo Lieblingsstück-Team,',
+  '',
+  'ich möchte gern ein Event anfragen.',
+  '',
+  'Anlass:',
+  'Anzahl der Personen (bei Kindern: Alter):',
+  'Wunschtermin und Alternativen:',
+  'Name und Telefonnummer:',
+  '',
+  'Viele Grüße',
+].join('\n');
+---
+<Base
+  title="Events & Gutscheine"
+  description="Kindergeburtstage, JGA, Team-Events und Gutscheine im Keramikstudio Dormagen – so fragst du dein Event an. Dazu saisonale Keramik-Events."
+>
+  <PageHero eyebrow="Events & Gutscheine">
+    Feier bei uns – kreativ &amp; <em>besonders.</em>
+    <Fragment slot="lead">Gemeinsam bemalen, lachen und etwas Bleibendes schaffen: Geburtstage, JGA, Team-Ausflüge – und Gutscheine zum Verschenken.</Fragment>
+    <div slot="actions" class="cluster reveal" style="--d:.24s"><Button href="#anfrage">Event anfragen</Button></div>
+  </PageHero>
+
+  {offers.map((o, i) => (
+    <section class:list={['section', i % 2 === 0 ? 'section--cream' : '']} id={o.id} aria-labelledby={`${o.id}-title`}>
+      <div class:list={['container', 'split', i % 2 === 1 && 'split--reverse']}>
+        <Photo class="reveal" src={images[o.id]} sizes="(min-width: 900px) 40vw, 90vw" alt={alts[o.id]} style="aspect-ratio:5/4" />
+        <div class="stack" style="--stack:var(--space-5)">
+          <p class="eyebrow reveal">{o.kicker}</p>
+          <h2 id={`${o.id}-title`} class="reveal">{o.title}</h2>
+          <p class="lead reveal">{o.text}</p>
+          {o.included.length > 0 && (
+            <div class="reveal">
+              <h3 style="font-size:1.4rem;margin-bottom:1rem">Was ist enthalten</h3>
+              <ul class="check-list">{o.included.map((x) => <li>{x}</li>)}</ul>
+            </div>
+          )}
+          {o.note && <div class="notice reveal"><h3>Wichtig</h3><p>{o.note}</p></div>}
+          <div class="reveal"><Button href={mailto(`Anfrage ${o.topic}`, template)} variant="ghost">{o.topic} anfragen</Button></div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section" id="gutscheine" aria-labelledby="voucher-title">
+    <div class="container split">
+      <div class="stack"><p class="eyebrow reveal">Zum Verschenken</p><h2 id="voucher-title" class="reveal">{voucher.title}</h2></div>
+      <div class="stack">
+        <p class="lead reveal">{voucher.text}</p>
+        <div class="reveal"><Button href="/contact" variant="ghost">Öffnungszeiten &amp; Anfahrt</Button></div>
+      </div>
+    </div>
+  </section>
+
+  {seasonal.length > 0 && (
+    <section class="section section--cream" id="saison" aria-labelledby="saison-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal">Saisonale Events</p>
+          <h2 id="saison-title" class="reveal">Was bei uns <em>demnächst</em> los ist.</h2>
+        </div>
+        <div class="seasonal" style="margin-top:0">
+          {seasonal.map((e) => {
+            const d = eventDate(e.date);
+            return (
+              <article class="seasonal__row reveal">
+                <p class="seasonal__date">{d.day}<small>{d.weekday}, {e.time} Uhr</small></p>
+                <div><h3 style="font-size:1.6rem">{e.title}</h3><p class="seasonal__text">{e.text} Eintritt {e.entry}.</p></div>
+                <Button href="/appointments" variant="ghost" size="sm">Platz buchen</Button>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section" id="anfrage" aria-labelledby="anfrage-title">
+    <div class="container split">
+      <div class="split__sticky">
+        <p class="eyebrow reveal">Anfrage</p>
+        <h2 id="anfrage-title" class="reveal">So fragst du dein Event <em>an.</em></h2>
+        <p class="muted reveal">Für Events (z. B. Geburtstage, JGAs, Firmenevents) bitten wir dich, vorab eine Anfrage zu stellen. Eine Buchung über den Kalender ist dafür nicht nötig.</p>
+      </div>
+      <div class="stack" style="--stack:var(--space-6)">
+        <div class="reveal">
+          <h3 style="font-size:1.5rem;margin-bottom:1rem">Das brauchen wir von dir</h3>
+          <ul class="check-list">{requestChecklist.map((x) => <li>{x}</li>)}</ul>
+        </div>
+        <div class="cluster reveal">
+          <Button href={mailto('Event-Anfrage', template)}>Per E-Mail anfragen</Button>
+          <Button href={`tel:${site.phones[0].tel}`} variant="ghost">{site.phones[0].label}</Button>
+        </div>
+        <p class="caption reveal">Die E-Mail öffnet sich mit einer Vorlage in deinem Mailprogramm. Anrufe sind nur während unserer <a href="/contact#zeiten">Öffnungszeiten</a> möglich.</p>
+      </div>
+    </div>
+  </section>
+
+  <PageCta text="Einzeltermine buchst du direkt online – für Gruppen und Events fragst du bitte vorab an." secondary={{ href: '#anfrage', label: 'Event anfragen' }}>
+    Zeit für eine <em>kreative Auszeit.</em>
+  </PageCta>
+</Base>

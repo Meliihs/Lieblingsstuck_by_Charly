@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+---
+<Base title="Impressum" description="Impressum von Lieblingsstück by Charly, Florastraße 4, 41539 Dormagen.">
+  <PageHero eyebrow="Rechtliches">Impressum</PageHero>
+  <section class="section" style="padding-top:0">
+    <div class="container container--narrow">
+      <div class="prose">
+        <h2 style="margin-top:0">Unternehmensname</h2>
+        <p>{site.legalName}<br />{site.name}</p>
+        <h2>Geschäftsadresse</h2>
+        <p>{site.address.street}, {site.address.zip} {site.address.city}</p>
+        <h2>Telefonnummer</h2>
+        <p><a href={`tel:${site.phones[0].tel}`}>{site.phones[0].label}</a></p>
+        <h2>E-Mail-Adresse</h2>
+        <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+        <h2>Name des Inhabers</h2>
+        <p>Charlene Legouez<br />Anastasia Legouez</p>
+      </div>
+    </div>
+  </section>
+</Base>

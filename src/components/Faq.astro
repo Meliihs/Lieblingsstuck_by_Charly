@@ -1,0 +1,13 @@
+---
+import type { FaqItem } from '../data/faq';
+interface Props { items: FaqItem[] }
+const { items } = Astro.props;
+---
+<div class="accordion">
+  {items.map((item) => (
+    <details>
+      <summary>{item.q}</summary>
+      <div class="accordion__a">{item.a.map((p) => <p>{p}</p>)}</div>
+    </details>
+  ))}
+</div>

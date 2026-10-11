@@ -1,0 +1,16 @@
+---
+interface Props { eyebrow: string }
+const { eyebrow } = Astro.props;
+const hasImage = Astro.slots.has('image');
+---
+<section class="page-hero">
+  <div class:list={['container', 'page-hero__grid', hasImage && 'page-hero__grid--img']}>
+    <div class="page-hero__copy">
+      <p class="eyebrow reveal">{eyebrow}</p>
+      <h1 class="reveal" style="--d:.08s"><slot /></h1>
+      {Astro.slots.has('lead') && <p class="lead reveal" style="--d:.16s"><slot name="lead" /></p>}
+      <slot name="actions" />
+    </div>
+    {hasImage && <div class="reveal" style="--d:.2s"><slot name="image" /></div>}
+  </div>
+</section>

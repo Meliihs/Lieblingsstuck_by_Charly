@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+---
+<Base title="Seite nicht gefunden" description="Diese Seite gibt es nicht." noindex>
+  <section class="section not-found">
+    <div class="container stack" style="--stack:var(--space-5);justify-items:start">
+      <p class="eyebrow">Fehler 404</p>
+      <h1>Hier ist leider <em>nichts bemalt.</em></h1>
+      <p class="lead">Die Seite wurde nicht gefunden. Vielleicht hilft dir die Startseite weiter.</p>
+      <div class="cluster"><Button href="/">Zur Startseite</Button><Button href="/appointments" variant="ghost">Termin buchen</Button></div>
+    </div>
+  </section>
+</Base>

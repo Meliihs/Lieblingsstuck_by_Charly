@@ -1,0 +1,21 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+  text: string;
+  secondary?: { href: string; label: string };
+}
+const { text, secondary } = Astro.props;
+---
+<section class="section section--dark" aria-labelledby="cta-title">
+  <div class="container cta-simple">
+    <h2 id="cta-title" class="reveal"><slot /></h2>
+    <div class="cta-simple__side reveal">
+      <p class="lead">{text}</p>
+      <div class="cluster">
+        <Button href="/appointments" variant="light">Termin buchen</Button>
+        {secondary && <Button href={secondary.href} variant="ghost">{secondary.label}</Button>}
+      </div>
+    </div>
+  </div>
+</section>

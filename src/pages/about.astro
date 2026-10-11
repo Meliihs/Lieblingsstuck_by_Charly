@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import PageCta from '../components/PageCta.astro';
+import Photo from '../components/Photo.astro';
+import Button from '../components/Button.astro';
+
+import raum from '../assets/photos/studio-raum.jpg';
+import theke from '../assets/photos/studio-theke.jpg';
+import regalwand from '../assets/photos/studio-regalwand.jpg';
+import farbbar from '../assets/photos/studio-farbbar.jpg';
+import froesche from '../assets/photos/illustration-froesche.jpg';
+---
+<Base
+  title="Über uns"
+  description="Wer wir sind: Mutter und Tochter und ihr kleines Keramikstudio in Dormagen – ein Ort, an dem man zur Ruhe kommt und einfach gestalten darf."
+>
+  <PageHero eyebrow="Über das Studio">
+    Mutter und Tochter, ein <em>gemeinsamer Traum.</em>
+    <Photo slot="image" class="page-hero__img" src={raum} priority sizes="(min-width: 900px) 30vw, 90vw" alt="Das Studio in Dormagen: heller Raum mit Tischen und Regalen voller Keramik" />
+  </PageHero>
+
+  <section class="section" aria-labelledby="who-title">
+    <div class="container split">
+      <div class="stack">
+        <p class="eyebrow reveal">Wer wir sind</p>
+        <h2 id="who-title" class="reveal">Schön, dass du <em>da bist.</em></h2>
+      </div>
+      <div class="stack" style="--stack:var(--space-5)">
+        <p class="lead reveal">Wir sind Mutter und Tochter und teilen nicht nur die Liebe zur Kreativität, sondern auch den Traum, etwas Eigenes zu schaffen. Mit unserem kleinen Keramikstudio haben wir genau das verwirklicht: einen Ort, an dem man zur Ruhe kommt, den Alltag für einen Moment vergisst und einfach gestalten darf.</p>
+        <p class="reveal">Mit Liebe zum Detail, einer großen Portion Begeisterung und viel Freude am Gestalten möchten wir euch einladen, bei uns eure eigenen Ideen auf Keramik zum Leben zu erwecken. Ob ihr zum ersten Mal malt oder schon Erfahrung habt – bei uns ist jeder willkommen.</p>
+        <p class="reveal">Schön, dass ihr da seid. Wir freuen uns auf euren Besuch und viele kreative Stunden mit euch!</p>
+        <div class="cluster reveal"><Button href="/appointments">Termin buchen</Button><Button href="/contact" variant="ghost">Kontakt &amp; Anfahrt</Button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream" aria-label="Einblicke ins Studio">
+    <div class="container">
+      <div class="gallery">
+        <Photo class="reveal" src={theke} sizes="(min-width: 900px) 30vw, 90vw" alt="Offener Studioraum mit Theke, rosa Wand und Kaffeebereich" style="aspect-ratio:3/4" />
+        <Photo class="reveal" src={regalwand} sizes="(min-width: 900px) 30vw, 90vw" alt="Lange Regalwand mit weißen Keramik-Rohlingen im Studio" style="aspect-ratio:3/4" />
+        <Photo class="reveal" src={farbbar} sizes="(min-width: 900px) 30vw, 90vw" alt="Regalinsel mit Keramikfarben und Rohlingen im Studio" style="aspect-ratio:3/4" />
+      </div>
+      <p class="caption" style="margin-top:1rem">Einblicke ins Studio in der Florastraße 4 in Dormagen.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Illustration">
+    <div class="container split split--reverse">
+      <Photo class="reveal" src={froesche} sizes="(min-width: 900px) 30vw, 70vw" alt="Illustration: zwei grüne Frösche umarmen sich" style="aspect-ratio:1;max-width:28rem" />
+      <div class="stack">
+        <h2 class="reveal">Für alle, ob <em>Anfänger</em> oder mit Erfahrung.</h2>
+        <p class="lead reveal">Bei uns steht das gemeinsame Gestalten im Mittelpunkt – allein, mit Freunden oder mit der Familie.</p>
+      </div>
+    </div>
+  </section>
+
+  <PageCta text="Such dir deinen Wunschtermin aus – wir freuen uns auf viele kreative Stunden mit dir." secondary={{ href: '/ablauf', label: 'So läuft ein Besuch ab' }}>
+    Komm vorbei und <em>gestalte.</em>
+  </PageCta>
+</Base>
+
+<style>
+  .gallery { display: grid; gap: var(--space-4); }
+  @media (min-width: 700px) {
+    .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2.5rem); align-items: start; }
+    .gallery > :nth-child(2) { margin-top: 3.5rem; }
+    .gallery > :nth-child(3) { margin-top: 1.5rem; }
+  }
+</style>

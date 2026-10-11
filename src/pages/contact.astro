@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import PageCta from '../components/PageCta.astro';
+import Icon from '../components/Icon.astro';
+import { formatSlots, hours, site } from '../data/site';
+---
+<Base
+  title="Kontakt & Anfahrt"
+  description="Kontakt zum Keramikstudio Lieblingsstück by Charly: Florastraße 4, 41539 Dormagen. Telefon, E-Mail, Öffnungszeiten und Anfahrt."
+>
+  <PageHero eyebrow="Kontakt">
+    Schreib uns oder <em>komm vorbei.</em>
+    <Fragment slot="lead">Wir freuen uns auf deine Nachricht – und auf deinen Besuch im Studio.</Fragment>
+  </PageHero>
+
+  <section class="section" style="padding-top:0" aria-label="Kontaktdaten">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="stack" style="--stack:var(--space-7)">
+          <div class="contact-block reveal">
+            <h2>Studio</h2>
+            <address class="contact-big">{site.address.street}<br />{site.address.zip} {site.address.city}</address>
+            <a class="link-arrow" style="justify-self:start" href={site.mapsUrl} target="_blank" rel="noopener noreferrer">Route planen <Icon name="external" /><span class="visually-hidden"> (öffnet in neuem Tab)</span></a>
+          </div>
+          <div class="contact-block reveal">
+            <h2>Telefon</h2>
+            {site.phones.map((p) => <a class="contact-big" href={`tel:${p.tel}`}>{p.label}</a>)}
+          </div>
+          <div class="contact-block reveal">
+            <h2>E-Mail</h2>
+            <a class="contact-big" href={`mailto:${site.email}`}>{site.email}</a>
+          </div>
+          <div class="contact-block reveal">
+            <h2>Folge uns</h2>
+            <div class="cluster">
+              <a class="link-arrow" href={site.social.instagram} target="_blank" rel="noopener noreferrer"><Icon name="instagram" /> Instagram<span class="visually-hidden"> (öffnet in neuem Tab)</span></a>
+              <a class="link-arrow" href={site.social.tiktok} target="_blank" rel="noopener noreferrer"><Icon name="tiktok" /> TikTok<span class="visually-hidden"> (öffnet in neuem Tab)</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="stack" style="--stack:var(--space-6)">
+          <div class="contact-block reveal" id="zeiten">
+            <h2>Öffnungszeiten</h2>
+            <dl class="hours">
+              {hours.map((d) => (
+                <div class:list={[d.slots.length === 0 && 'is-closed']}><dt>{d.day}</dt><dd>{formatSlots(d.slots)}</dd></div>
+              ))}
+            </dl>
+          </div>
+          <div class="notice reveal">
+            <h2>Wichtig</h2>
+            <p>Bitte beachte immer unsere Öffnungszeiten für Anrufe und Abholungen. Außerhalb dieser Zeiten sind wir telefonisch nicht erreichbar. Abholungen sind nur während der Öffnungszeiten möglich.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <PageCta text="Einzeltermine buchst du direkt online. Für Gruppen und Events fragst du bitte vorab an." secondary={{ href: '/events#anfrage', label: 'Event anfragen' }}>
+    Lust auf <em>Farbe?</em>
+  </PageCta>
+</Base>

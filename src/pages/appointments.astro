@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+---
+<Base
+  title="Termin buchen"
+  description="Buche online deinen Termin im Keramikstudio Lieblingsstück in Dormagen. 3 Stunden Malzeit, Abholung nach ca. 2–3 Wochen. Events bitte vorab anfragen."
+>
+  <PageHero eyebrow="Terminbuchung">
+    Plane deine <em>kreative Auszeit.</em>
+    <Fragment slot="lead">Für deine Malzeit im Studio hast du 3 Stunden Zeit. Such dir im Kalender deinen Wunschtermin aus.</Fragment>
+  </PageHero>
+
+  <section class="section" style="padding-top:0" aria-label="Buchung">
+    <div class="container split">
+      <div class="stack split__sticky" style="--stack:var(--space-5)">
+        <div class="notice reveal">
+          <h2>Wichtig</h2>
+          <ul class="check-list" style="margin-top:.5rem">
+            <li>Für Events (z. B. Geburtstage, JGAs, Firmenevents) bitten wir dich, vorab eine <a href="/events#anfrage">Anfrage</a> zu stellen.</li>
+            <li>Bitte unter dem Feld „Menge“ die Personenanzahl angeben.</li>
+            <li>Beim Stornieren alle Personen auswählen.</li>
+            <li>Die Keramiken sind nach 2–3 Wochen mit Abholschein oder Foto abholbereit.</li>
+            <li>Bitte Verpackungsmaterial beim Abholen mitbringen.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="booking reveal" data-booking>
+        <div class="booking__consent" data-consent>
+          <h2 style="font-size:var(--fs-h3)">Buchungskalender</h2>
+          <p>Unsere Terminbuchung läuft über Acuity Scheduling (Squarespace Inc., USA). Erst wenn du den Kalender lädst, werden Daten an diesen Dienst übertragen. Mehr dazu in der <a href="/datenschutzerklrung">Datenschutzerklärung</a>.</p>
+          <button class="btn" type="button" data-load>
+            <span>Kalender laden</span>
+            <span class="btn__icon"><Icon name="arrow" /></span>
+          </button>
+          <a class="link-arrow" href={site.bookingEmbedUrl} target="_blank" rel="noopener noreferrer">Oder direkt auf der Buchungsseite öffnen <Icon name="external" /><span class="visually-hidden"> (öffnet in neuem Tab)</span></a>
+        </div>
+        <iframe class="booking__frame" title="Terminbuchung" data-src={site.bookingEmbedUrl} data-script={site.bookingEmbedScript} hidden></iframe>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-booking]');
+  const frame = root?.querySelector<HTMLIFrameElement>('iframe');
+  const consent = root?.querySelector<HTMLElement>('[data-consent]');
+  root?.querySelector('[data-load]')?.addEventListener('click', () => {
+    if (!frame || !consent) return;
+    frame.src = frame.dataset.src!;
+    frame.hidden = false;
+    consent.hidden = true;
+    const s = document.createElement('script');
+    s.src = frame.dataset.script!; // Acuity-Skript passt die Rahmenhöhe automatisch an
+    document.body.append(s);
+    frame.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>

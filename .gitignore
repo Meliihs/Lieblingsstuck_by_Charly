@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.astro/
+_srcimg/
+_*.mjs
+_shots/

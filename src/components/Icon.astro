@@ -1,0 +1,11 @@
+---
+// Zarte Linienicons (Strichstärke 1.5), bewusst ohne Icon-Bibliothek.
+interface Props { name: 'arrow' | 'instagram' | 'tiktok' | 'external'; class?: string }
+const { name, class: className } = Astro.props;
+---
+<svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  {name === 'arrow' && <path d="M4 12h15m-5.5-5.5L19 12l-5.5 5.5" />}
+  {name === 'external' && <path d="M7 17 17 7M8.5 7H17v8.5" />}
+  {name === 'instagram' && (<><rect x="3.5" y="3.5" width="17" height="17" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none" /></>)}
+  {name === 'tiktok' && <path d="M14 4v10.2a3.7 3.7 0 1 1-3.7-3.7M14 4c.4 2.4 2 4 4.5 4.2" />}
+</svg>

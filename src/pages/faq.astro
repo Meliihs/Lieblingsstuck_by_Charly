@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import PageCta from '../components/PageCta.astro';
+import Faq from '../components/Faq.astro';
+import { faqGroups } from '../data/faq';
+
+const faqLd = {
+  '@type': 'FAQPage',
+  mainEntity: faqGroups.flatMap((g) => g.items).map((i) => ({
+    '@type': 'Question',
+    name: i.q,
+    acceptedAnswer: { '@type': 'Answer', text: i.a.join(' ') },
+  })),
+};
+---
+<Base
+  title="Häufige Fragen (FAQ)"
+  description="Antworten auf die wichtigsten Fragen zum Keramik bemalen in Dormagen: Ablauf, Terminbuchung, Preise, Brennen & Abholung, Kindergeburtstage und Events."
+  jsonLd={[faqLd]}
+>
+  <PageHero eyebrow="FAQ">
+    Häufige <em>Fragen.</em>
+    <Fragment slot="lead">Alles Wichtige zu Ablauf, Terminen, Preisen und Abholung – kurz und ehrlich beantwortet.</Fragment>
+  </PageHero>
+
+  <section class="section" style="padding-top:0" aria-label="Fragen und Antworten">
+    <div class="container split">
+      <nav class="split__sticky" aria-label="Themen">
+        <p class="eyebrow">Themen</p>
+        <ul class="stack" style="--stack:.25rem">
+          {faqGroups.map((g) => <li><a class="link-arrow" style="border-bottom-color:transparent" href={`#${g.id}`}>{g.title}</a></li>)}
+        </ul>
+      </nav>
+      <div>
+        {faqGroups.map((g) => (
+          <section class="faq-group" id={g.id} aria-labelledby={`${g.id}-title`}>
+            <h2 id={`${g.id}-title`}>{g.title}</h2>
+            <Faq items={g.items} />
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <PageCta text="Deine Frage ist nicht dabei? Schreib uns oder ruf in unseren Öffnungszeiten an." secondary={{ href: '/contact', label: 'Kontakt' }}>
+    Noch Fragen? <em>Wir sind da.</em>
+  </PageCta>
+</Base>
