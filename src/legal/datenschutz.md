@@ -52,7 +52,7 @@ Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO
 
 ## 6. Cookies und technische Dienste
 
-Unsere Website selbst setzt keine Cookies und verwendet kein Tracking. Erst wenn du auf der Terminseite den Buchungskalender lädst, wird eine Verbindung zu Acuity Scheduling (Squarespace) hergestellt; dabei können technisch notwendige Cookies gesetzt werden. Tracking-Cookies für Marketingzwecke verwenden wir nicht.
+Unsere Website selbst setzt keine Cookies und verwendet kein Tracking. Wenn du auf „Termin buchen“ klickst, wirst du auf die Seite unseres Buchungsanbieters weitergeleitet. Dort gelten dessen Datenschutzhinweise, und es können technisch notwendige Cookies gesetzt werden. Tracking-Cookies für Marketingzwecke verwenden wir nicht.
 
 ## 7. Speicherdauer
 

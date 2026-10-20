@@ -15,9 +15,8 @@ export const site = {
     tiktok: 'https://www.tiktok.com/@lieblingsstueck.dormagen',
   },
   mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Florastra%C3%9Fe+4+41539+Dormagen',
-  // Bestehende Buchung: Acuity Scheduling (Squarespace), unverändert weiterverwendet.
-  bookingEmbedUrl: 'https://app.acuityscheduling.com/schedule.php?owner=36378224',
-  bookingEmbedScript: 'https://embed.acuityscheduling.com/js/embed.js',
+  // Ziel des Buchen-Buttons. Platzhalter: bisheriger Acuity-Kalender; hier später die Adresse des neuen Buchungssystems eintragen.
+  bookingUrl: 'https://app.acuityscheduling.com/schedule.php?owner=36378224',
 } as const;
 
 export const nav = [
